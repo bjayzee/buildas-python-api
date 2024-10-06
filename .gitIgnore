@@ -1,0 +1,50 @@
+# IDE and editor files
+.idea
+.vscode
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# MyPy cache
+.mypy_cache
+
+# Python cache
+__pycache__
+
+# Pytest cache
+.pytest_cache
+
+# Coverage reports
+htmlcov
+.coverage*
+coverage.xml
+
+# Netlify directory
+.netlify
+
+# Database files
+test.db
+
+# Log files
+log.txt
+
+# Pipenv and virtual environment files
+Pipfile.lock
+env3.*
+env
+.env
+venv
+
+# Documentation builds
+docs_build
+site_build
+docs.zip
+archive.zip
+
+# Temporary files
+*~
+.*.sw?
+.cache
+
+# macOS specific files
+.DS_Store
