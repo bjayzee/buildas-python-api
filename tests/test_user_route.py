@@ -23,28 +23,27 @@ def test_register():
 
 def get_user_data():
     """Helper function to register a user and return user login details."""
-    password = "password1"  # Define a fixed password
+    password = "password1" 
     user_data = {
         "username": fake.user_name(),
         "name": fake.name(),
         "email": fake.email(),
-        "password": password  # Include the password here
+        "password": password 
     }
 
     response = client.post("/users/register", json=user_data)
     assert response.status_code == 200
 
-    # Return user data including the password
     return {
         "id": response.json()["data"]["id"],
-        "email": user_data["email"],  # Return the email for login
-        "password": password  # Return the same password for login
+        "email": user_data["email"], 
+        "password": password
     }
 
 
 
 def test_login():
-    login_data = get_user_data()  # Get registered user login details
+    login_data = get_user_data() 
 
     response = client.post("/users/login", json=login_data)
 
@@ -65,33 +64,29 @@ def get_user_data():
     response = client.post("/users/register", json=user_data)
     assert response.status_code == 200
     
-    # Print the user data to debug
     print("Registered user data:", response.json()) 
 
     return {
-        "id": response.json()["data"]["id"],  # Ensure this matches your model
+        "id": response.json()["data"]["id"],
         "email": user_data["email"],
         "password": password
     }
 
 def test_get_user():
-    user_data = get_user_data()  # Register and get user data
+    user_data = get_user_data()
     
-    # Fetch the user by ID
     response = client.get(f"/users/{user_data['id']}")
     assert response.status_code == 200
     assert response.json()["data"]["email"] == user_data["email"]
     assert response.json()["message"] == "User fetched successfully"
 
 def test_delete_user():
-    user_data = get_user_data()  # Register and get user data
+    user_data = get_user_data()
     
-    # Delete the user by ID
     response = client.delete(f"/users/{user_data['id']}")
     assert response.status_code == 200
     assert response.json()["message"] == "User deleted successfully"
 
-    # Try to get the deleted user (should return 404)
     response = client.get(f"/users/{user_data['id']}")
     assert response.status_code == 404
     assert response.json()["detail"] == "User not found"
